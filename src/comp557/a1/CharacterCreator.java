@@ -2,7 +2,7 @@ package comp557.a1;
 
 public class CharacterCreator {
 
-	static public String name = "CHARACTER NAME - YOUR NAME AND STUDENT NUMBER";
+	static public String name = "LITTLE MAC - JOSH LIU 260612384";
 	
 	/** 
 	 * Creates a character.
@@ -13,6 +13,14 @@ public class CharacterCreator {
 		// Here we just return an empty node  to allow the sample code to run.
 		// You should REMOVE THE LINE BELOW and instead 
 		// return the root of your character	
-    	return new DAGNode() { };
+    	FreeJointDAGNode root = new FreeJointDAGNode("root");
+    	HingeJointDAGNode left = new HingeJointDAGNode("left", -1d, 0d, 0d, 0d, "yaw");
+    	root.add(left);
+    	SphericalDAGNode ls = new SphericalDAGNode("ls", 0d, 0d, 0d, 1d, 1d, 1d);
+    	ls.setColor(1f, 0f, 0f);
+    	left.add(ls);
+    	BallJointDAGNode right = new BallJointDAGNode("right", 1d, 0d, 0d, 0d, 0d, 0d);
+    	root.add(right);
+    	return root;
 	}
 }

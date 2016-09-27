@@ -297,7 +297,7 @@ public class KeyFramedScene {
 	public void loadKeyFrames() {
     	keyPoses.clear();
         try {
-            FileInputStream fis = new FileInputStream( new File("a2data/keyposes.javabin"));
+            FileInputStream fis = new FileInputStream( new File("a1data/keyposes.javabin"));
             ObjectInputStream ois = new ObjectInputStream(fis);
             keyPoses = (ArrayList<double[]>) ois.readObject();                
             fis.close();
