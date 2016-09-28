@@ -5,14 +5,23 @@ import com.jogamp.opengl.GLAutoDrawable;
 
 import mintools.parameters.DoubleParameter;
 
+// Josh Liu ID:260612384
+
+// A joint that only rotates 90 degrees in one direction. Renders nothing.
 public class HingeJointDAGNode extends DAGNode {
 
+	// translation relative to parent 
 	private double transx = 0d;
 	private double transy = 0d;
 	private double transz = 0d;
+	
+	// axis to rotate on
 	private String axis;
+	
+	// flip to rotate in the other direction
 	private boolean flipped = false;
 	
+	// takes in name, translation, and axis to rotate on
 	public HingeJointDAGNode(String n, double tx, double ty, double tz, String a) {	
 		name = n;
 		transx = tx;
@@ -34,11 +43,17 @@ public class HingeJointDAGNode extends DAGNode {
 		flipped = true;
 	}
 	
+	// transfers flip to all children
     public void display(GLAutoDrawable drawable) {
     	
     	GL2 gl = drawable.getGL().getGL2();
     	gl.glPushMatrix();
     	gl.glTranslatef((float)transx, (float)transy, (float)transz);
+    	if (flipped) {
+    		if (axis.equals("pitch")) gl.glRotatef(180, 0.0f, 1.0f, 0.0f);
+    		if (axis.equals("yaw")) gl.glRotatef(180, 1.0f, 0.0f, 0.0f);
+    		if (axis.equals("roll")) gl.glRotatef(180, 0.0f, 0.0f, 1.0f);    		
+    	}
     	for (DoubleParameter param: dofs) {
     		switch(param.getName()) {
 				case "pitch": gl.glRotatef(param.getFloatValue(), 1.0f, 0.0f, 0.0f);
@@ -49,11 +64,6 @@ public class HingeJointDAGNode extends DAGNode {
 					 		 break;     		        
 				default: break;
     		}
-    	}
-    	if (flipped) {
-    		if (axis.equals("pitch")) gl.glRotatef(90, 1.0f, 0.0f, 0.0f);
-    		if (axis.equals("yaw")) gl.glRotatef(180, 0.0f, 0.0f, 1.0f);
-    		if (axis.equals("roll")) gl.glRotatef(180, 1.0f, 0.0f, 0.0f);    		
     	}
     	super.display(drawable);
     	gl.glPopMatrix();

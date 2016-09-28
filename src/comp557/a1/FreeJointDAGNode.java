@@ -5,9 +5,14 @@ import com.jogamp.opengl.GLAutoDrawable;
 
 import mintools.parameters.DoubleParameter;
 
+// Josh Liu ID:260612384
+
+// Joint that can translate and rotate in any direction. Used only for root. 
 public class FreeJointDAGNode extends DAGNode {
 	
+	// takes only a name 
 	public FreeJointDAGNode(String n) {	
+		// max and mins are set a borders of screen and 180 degrees on each side 
 		name = n;
 		dofs.add(new DoubleParameter("vertical", 0.0d, -20f, 20f));
 		dofs.add(new DoubleParameter("horizontal", 0.0d, -20f, 20f));
@@ -17,6 +22,7 @@ public class FreeJointDAGNode extends DAGNode {
 		dofs.add(new DoubleParameter("roll", 0.0d, -180d, 180d));
 	}
 	
+	// transforms based on slider values
     public void display(GLAutoDrawable drawable) {
     	
     	GL2 gl = drawable.getGL().getGL2();
