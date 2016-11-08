@@ -380,7 +380,7 @@ public class A2App extends A2Base {
 		        gl.glColor3f(1f, 1f, 1f);
 	        gl.glPopMatrix();
 	        
-	        // draw both eye frustums, left = red, right = blue
+	        // draw both eye frustums, left = red, right = cyan
             if (drawEyeFrustums.getValue()) {
             	
             	gl.glPushMatrix();
@@ -425,7 +425,7 @@ public class A2App extends A2Base {
 	                rightmatrix.reconstitute();
 	                rightinverse.getBackingMatrix().invert(rightmatrix.getBackingMatrix());
 	                gl.glMultMatrixf(rightinverse.asArray(), 0);
-	                gl.glColor3f(0f, 0f, 1f);
+	                gl.glColor3f(0f, 1f, 1f);
 	                glut.glutWireCube(2);
 	                gl.glColor3f(1f,  1f, 1f);
 	                
@@ -549,7 +549,7 @@ public class A2App extends A2Base {
         	                               
         } else if ( viewingMode == 6 ) {            
         	
-        	// draw anaglyph left = red, right = blue
+        	// draw anaglyph left = red, right = cyan
         	
         	// left eye view
         	tbc.prepareForDisplay(drawable);
@@ -575,7 +575,7 @@ public class A2App extends A2Base {
         	       
         	// right eye view        	  
         	gl.glPushMatrix();
-        	gl.glColorMask(false, false, true, true);
+        	gl.glColorMask(false, true, true, true);
     		gl.glLoadIdentity();		
     		glu.gluLookAt(rightEyeOffset, eyeYOffset.getValue(), eyeZPosition.getValue(), 
     				rightEyeOffset, eyeYOffset.getValue(), focalPlaneZPosition.getValue(), 0, 1, 0);
